@@ -1,0 +1,18 @@
+{
+  "name": "list-patch",
+  "version": "1.0.0",
+  "description": "Patch a list of DOM elements",
+  "scripts": {
+    "test": "cd test; watchify index.js -o build.js & PORT=7357 ROOT=. app-server & wait"
+  },
+  "devDependencies": {
+    "app-server": "jessetane/app-server#3.0.1",
+    "browserify": "^13.0.0",
+    "document-register-element": "^0.5.4",
+    "tape": "^4.4.0",
+    "watchify": "^3.7.0"
+  },
+  "repository": "https://github.com/jessetane/list-patch",
+  "author": "jesse.tane@gmail.com",
+  "license": "Public Domain"
+}
