@@ -1,6 +1,6 @@
 {
   "name": "list-patch",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Patch a list of DOM elements",
   "scripts": {
     "test": "cd test; watchify index.js -o build.js & PORT=7357 ROOT=. app-server & wait"
