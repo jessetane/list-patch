@@ -1,5 +1,5 @@
 module.exports = function (list, opts) {
-  var elementConstructor = opts.elementConstructor
+  var createElement = opts.createElement
   var states = opts.states
   var stateKey = opts.key || 'id'
   var each = opts.each
@@ -32,7 +32,7 @@ module.exports = function (list, opts) {
     var key = state[stateKey]
     var existingChild = existing[key]
     if (!existingChild) {
-      existingChild = new elementConstructor()
+      existingChild = new createElement(state, i)
     }
     existingChild.state = state
     var child = children[i]
