@@ -40,7 +40,7 @@ module.exports = function (list, opts) {
       list.insertBefore(existingChild, child)
     }
     if (each) {
-      each(existingChild)
+      each(existingChild, i)
     }
   })
 }
