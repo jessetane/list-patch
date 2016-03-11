@@ -1,27 +1,33 @@
 var tape = require('tape')
 var patch = require('../')
 
+// not required, I just like experimenting with custom elements
+require('custom-elements')
+
+function XRow () {
+  HTMLElement.call(this)
+}
+XRow.prototype = Object.create(HTMLElement.prototype)
+XRow.prototype.attachedCallback = function () {
+  this.innerHTML = this.state.id
+}
+document.defineElement('x-row', XRow)
+
+function createRow (state, i) {
+  return document.createElement('x-row')
+}
+
 var states = [
   { id: 'a' },
   { id: 'c' },
   { id: 'b' }
 ]
 
-var Row = document.registerElement('x-row', {
-  prototype: Object.create(HTMLElement.prototype, {
-    attachedCallback: {
-      value: function () {
-        this.innerHTML = this.state.id
-      }
-    }
-  })
-})
-
 tape('add', function (t) {
   t.plan(1)
 
   patch(document.body, {
-    elementConstructor: Row,
+    createElement: createRow,
     states: states
   })
 
@@ -39,7 +45,7 @@ tape('sort', function (t) {
   states.splice(1, 0, states.pop())
 
   patch(document.body, {
-    elementConstructor: Row,
+    createElement: createRow,
     states: states
   })
 
@@ -57,7 +63,7 @@ tape('remove', function (t) {
   states.shift()
 
   patch(document.body, {
-    elementConstructor: Row,
+    createElement: createRow,
     states: states
   })
 
@@ -78,10 +84,12 @@ tape('custom key and each callback', function (t) {
   ]
 
   patch(document.body, {
-    elementConstructor: Row,
+    createElement: createRow,
     states: states,
     key: 'name',
-    each: (el) => el.innerHTML = el.state.name
+    each: el => {
+      el.innerHTML = el.state.name
+    }
   })
 
   t.equal(

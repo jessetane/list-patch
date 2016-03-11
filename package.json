@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "app-server": "jessetane/app-server#3.0.1",
+    "custom-elements": "github:jessetane/custom-elements#0.0.1",
     "tape": "^4.4.0",
     "watchify": "^3.7.0"
   },
