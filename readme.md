@@ -18,14 +18,18 @@ var states = [
   { id: 'b' }
 ]
 
-var Row = document.registerElement('x-row', class extends HTMLElement {
+document.defineElement('x-row', class extends HTMLElement {
   attachedCallback () {
     this.innerHTML = this.state.id
   }
 })
 
+function createRow (state, i) {
+  return document.createElement('x-row')
+}
+
 patch(document.body, {
-  elementConstructor: Row,
+  createElement: createRow,
   states: states
 })
 
@@ -40,7 +44,7 @@ Reorder:
 states.splice(1, 0, states.pop())
 
 patch(document.body, {
-  elementConstructor: Row,
+  createElement: createRow,
   states: states
 })
 
@@ -55,7 +59,7 @@ Remove:
 states.shift()
 
 patch(document.body, {
-  elementConstructor: Row,
+  createElement: createRow,
   states: states
 })
 
@@ -73,10 +77,12 @@ var states = [
 ]
 
 patch(document.body, {
-  elementConstructor: Row,
+  createElement: createRow,
   states: states,
   key: 'name',
-  each: (el) => el.innerHTML = el.state.name
+  each: el => {
+    el.innerHTML = el.state.name
+  }
 })
 
 console.log(document.body.innerHTML)
