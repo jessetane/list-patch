@@ -99,3 +99,29 @@ tape('custom key and each callback', function (t) {
 <x-row>c</x-row>`.replace(/\n/g, '')
   )
 })
+
+tape('allow numeric keys', function (t) {
+  t.plan(1)
+
+  var states = [
+    [ 'a' ],
+    [ 'b' ],
+    [ 'c' ]
+  ]
+
+  patch(document.body, {
+    createElement: createRow,
+    states: states,
+    key: 0,
+    each: el => {
+      el.innerHTML = el.state[0]
+    }
+  })
+
+  t.equal(
+    document.body.innerHTML,
+    `<x-row>a</x-row>
+<x-row>b</x-row>
+<x-row>c</x-row>`.replace(/\n/g, '')
+  )
+})
