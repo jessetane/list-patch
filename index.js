@@ -1,7 +1,7 @@
 module.exports = function (list, opts) {
   var createElement = opts.createElement
   var states = opts.states
-  var stateKey = opts.key || 'id'
+  var stateKey = opts.key === undefined ? 'id' : opts.key
   var each = opts.each
 
   var children = list.children
