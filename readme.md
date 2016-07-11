@@ -91,4 +91,4 @@ console.log(document.body.innerHTML)
 ```
 
 ## License
-Public Domain
+MIT
